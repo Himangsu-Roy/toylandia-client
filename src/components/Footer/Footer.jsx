@@ -1,6 +1,7 @@
 import React from "react";
 import { ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "../../assets/attachment_80402256-removebg-preview (1).png";
 
 const Footer = () => {
   const productCategories = [
@@ -15,8 +16,14 @@ const Footer = () => {
     { title: "Link 3", url: "/link3" },
   ];
 
+  const headQuarters = [
+    { address: "374 Main Street 09733 Western London" },
+    { email: "info@example.com" },
+    { phone: "+1(44)123-45-67" },
+  ];
+
   return (
-    <footer className="w-full bg-[#343434] text-white">
+    <footer className="w-full md:pt-20 pt-10 bg-[#343434] text-white">
       <div className="mx-auto flex max-w-6xl flex-col items-start space-x-8 md:flex-row ">
         <div className="w-full px-4 md:w-1/2 lg:px-0">
           <h1 className="max-w-sm text-2xl font-bold uppercase tracking-wider">
@@ -38,10 +45,9 @@ const Footer = () => {
               <ChevronRight className="h-4 w-4" />
             </button>
           </form>
-          <h1>Find us any where</h1>
-          <div className=" gap-4 flex flex-wrap">
+          <h1 className="uppercase mt-9">Find us any Elsewhere</h1>
+          <div className="mt-4 gap-4 flex flex-wrap">
             {" "}
-            {/* flex-col sm:flex-row */}
             <Link>facebook</Link>
             <Link>facebook</Link>
             <Link>facebook</Link>
@@ -49,27 +55,11 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-8 grid grid-cols-2 gap-6 md:mt-0 lg:w-3/4 lg:grid-cols-3">
-          {/* {Array.from({ length: 1 }).map((_, i) => (
-            <div key={i} className="mb-8 lg:mb-0">
-              <p className="mb-6 text-lg font-semibold text-gray-700 ">
-                Product Categories
-              </p>
-             
-              <ul className="flex flex-col space-y-4 text-[14px] font-medium text-gray-500">
-                <li>About us</li>
-                <li>Company History</li>
-                <li>Our Team</li>
-                <li>Our Vision</li>
-                <li>Press Release</li>
-              </ul>
-            </div>
-          ))} */}
-
           <div>
             <h3 className="mb-8 lg:mb-3  text-lg font-semibold text-white">
               Product Categories
             </h3>
-            <ul className="flex flex-col space-y-4 text-[14px] font-medium text-gray-500">
+            <ul className="flex flex-col space-y-4 text-[14px] font-medium text-[#A6A6A6]">
               {productCategories.map((item, index) => (
                 <li key={index}>
                   <Link href={item.url}>{item.title}</Link>
@@ -82,7 +72,7 @@ const Footer = () => {
             <h3 className="mb-8 lg:mb-3  text-lg font-semibold text-white">
               Quick Links
             </h3>
-            <ul className="flex flex-col space-y-4 text-[14px] font-medium text-gray-500">
+            <ul className="flex flex-col space-y-4 text-[14px] font-medium text-[#A6A6A6]">
               {quickLinks.map((item, index) => (
                 <li key={index}>
                   <Link href={item.url}>{item.title}</Link>
@@ -90,12 +80,29 @@ const Footer = () => {
               ))}
             </ul>
           </div>
+
+          <div>
+            <h3 className="mb-8 lg:mb-3  text-lg font-semibold text-white">
+              Our HeadQuarters
+            </h3>
+            <ul className="flex flex-col space-y-4 text-[14px] font-medium text-[#A6A6A6]">
+              {headQuarters.map((item, index) => (
+                <li key={index}>
+                  {item.address}
+                  {item.email}
+                  {item.phone}
+                </li>
+              ))}
+              <Link to="/">
+                <img src={logo} className="w-[60px]" alt="logo" />
+              </Link>
+            </ul>
+          </div>
         </div>
 
         {/*  */}
       </div>
-      <div className="bg-[#1A1A1A] flex items-center py-3 mt-4">
-        {/* <hr className="my-4 " /> */}
+      <div className="bg-[#1A1A1A] flex items-center py-3 md:mt-20 mt-10">
         <div className="mx-auto max-w-6xl items-center justify-between px-4 md:flex lg:px-0 ">
           <div className="inline-flex items-center">
             <div className="m-4 ">
