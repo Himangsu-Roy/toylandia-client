@@ -3,16 +3,22 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const Register = () => {
-  const [error, setError] = useState("");
+  //? Context
   const { createUser, userProfile, signInWithGoogle } = useContext(AuthContext);
+
+  //? Hooks
+  const [error, setError] = useState("");
   const [username, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [photoUrl, setPhotoUrl] = useState("");
+
+  //? Navigate
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
+  //? Handle Input value
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
@@ -26,6 +32,7 @@ const Register = () => {
     setPhotoUrl(e.target.value);
   };
 
+  //? Handle Sign Up Form
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -63,6 +70,7 @@ const Register = () => {
     setPhotoUrl("");
   };
 
+  //? Hander Google Sign In
   const handleGoogleSignIn = () => {
     signInWithGoogle().then((result) => {
       const user = result.user;
