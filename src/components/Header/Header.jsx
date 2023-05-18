@@ -9,6 +9,8 @@ const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate()
 
+  console.log(user)
+
   const signOut = () => {
     logOut()
       .then(() => {
@@ -57,7 +59,7 @@ const Header = () => {
           </span>
           <span className="font-bold">ToyLandia</span>
         </div>
-        <div className="hidden lg:block">
+        <div className="hidden lg:block ml-auto">
           <ul className="inline-flex space-x-8">
             {menuItems.map((item) => (
               <li key={item.name}>
@@ -71,17 +73,26 @@ const Header = () => {
             ))}
           </ul>
         </div>
+
         {user ? (
-          <div className="hidden lg:block">
-            <Link to="" onClick={signOut}>
-              <button
-                type="button"
-                className="rounded-md bg-[#EE552A] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#EE552A]/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-              >
-                Sign Out
-              </button>
-            </Link>
-          </div>
+          <>
+            <img
+              className="w-[40px] ml-auto rounded-full hidden lg:block"
+              src={user.photoURL}
+              alt=""
+              title={user.displayName}
+            />
+            <div className="hidden lg:block ml-4">
+              <Link to="" onClick={signOut}>
+                <button
+                  type="button"
+                  className="rounded-md bg-[#EE552A] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#EE552A]/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                >
+                  Sign Out
+                </button>
+              </Link>
+            </div>
+          </>
         ) : (
           <div className="hidden lg:block">
             <Link to="/register">
@@ -136,15 +147,23 @@ const Header = () => {
                   </nav>
                 </div>
                 {user ? (
-                  <div className="mt-2 space-y-2">
-                    <Link to="" onClick={signOut}>
-                      <button
-                        type="button"
-                        className="rounded-md bg-[#EE552A] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#EE552A]/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                      >
-                        Sign Out
-                      </button>
-                    </Link>
+                  <div className="">
+                    <img
+                      className="w-[40px] my-4 rounded-full "
+                      src={user.photoURL}
+                      alt=""
+                      title={user.displayName}
+                    />
+                    <div className="mt-2 space-y-2">
+                      <Link to="" onClick={signOut}>
+                        <button
+                          type="button"
+                          className="rounded-md bg-[#EE552A] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#EE552A]/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                        >
+                          Sign Out
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 ) : (
                   <div className="mt-2 space-y-2">
