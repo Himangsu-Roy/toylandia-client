@@ -11,6 +11,7 @@ const Login = () => {
 
   const from = location.state?.from?.pathname || "/";
 
+  //? Input value Handler
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -18,6 +19,7 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
+  //? Handle Sign In Form Submit
   const handleSubmit = (e) => {
     e.preventDefault();
     signIn(email, password)
@@ -33,6 +35,7 @@ const Login = () => {
     setPassword("");
   };
 
+  //? handle Google Submit
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then(result => {
