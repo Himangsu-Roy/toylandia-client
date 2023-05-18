@@ -19,26 +19,32 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  //? New User Create
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
+  //? User Profile Update
   const userProfile = (name, photoUrl) => {
     setLoading(true);
     return updateProfile(name, photoUrl);
   };
 
+  //? Sign In
   const signIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+
+  //? Google Sign In
   const signInWithGoogle = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
+  //? Auth State Changed
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
       setUser(loggedUser);
@@ -49,6 +55,7 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
+  //? Logout
   const logOut = () => {
     return signOut(auth);
   };
