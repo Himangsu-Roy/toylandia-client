@@ -4,12 +4,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCVV7LfZ89iHjjjQUwWlly0caHnK-UTDyo",
-  authDomain: "toylandia-59a58.firebaseapp.com",
-  projectId: "toylandia-59a58",
-  storageBucket: "toylandia-59a58.appspot.com",
-  messagingSenderId: "881789143746",
-  appId: "1:881789143746:web:3577d241687f18970c895b",
+  apiKey: import.meta.env.APIKEY,
+  authDomain: import.meta.env.AUTHDOMAIN,
+  projectId: import.meta.env.PROJECTID,
+  storageBucket: import.meta.env.STORAGEBUCKET,
+  messagingSenderId: import.meta.env.MESSAGINGSENDERID,
+  appId: import.meta.env.APPID,
 };
 
 // Initialize Firebase
