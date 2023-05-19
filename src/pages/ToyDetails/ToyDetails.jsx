@@ -1,17 +1,20 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Modal from "../../components/Modal/Modal";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 
 function ToyDetails() {
+    const {user} = useContext(AuthContext)
   const { id } = useParams();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(true);
 
-  const isAuthenticated = true; // Replace with your actual authentication logic
+  
 
   const handleViewDetails = () => {
-    if (isAuthenticated) {
+    if (user) {
       setIsModalOpen(true);
     } else {
       alert("You have to log in first to view details");

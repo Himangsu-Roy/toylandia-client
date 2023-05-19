@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import { AuthContext } from "../../contexts/AuthProvider";
+import Swal from "sweetalert2";
 
 function ShopByCategory() {
   const {user} = useContext(AuthContext)
@@ -51,6 +52,12 @@ function ShopByCategory() {
    const handleViewDetails = (id) => {
 
      if (!user) {
+       Swal.fire({
+         title: "Error!",
+         text: "You have to log in first to view details",
+         icon: "error",
+         confirmButtonText: "Cool",
+       });
        navigate("/login");
      } else {
        // Redirect to the details page with the toy ID
