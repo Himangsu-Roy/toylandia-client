@@ -4,7 +4,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const toysData = [
-  
   // Sample toy data, replace with actual toy data from your data source
   {
     id: 1,
@@ -74,7 +73,7 @@ const toysData = [
 ];
 
 const AllToys = () => {
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [toys, setToys] = useState(toysData);
   const navigate = useNavigate();
@@ -94,15 +93,14 @@ const AllToys = () => {
   const handleViewDetails = (id) => {
     if (!user) {
       navigate("/login");
-      console.log(location)
+      console.log(location);
     } else {
-
       navigate(`/toy/${id}`);
     }
   };
 
   return (
-    <div>
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <h1>All Toys</h1>
 
       <div className="my-4">
@@ -111,41 +109,43 @@ const AllToys = () => {
           placeholder="Search by toy name"
           value={searchTerm}
           onChange={handleSearch}
-          className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white"
         />
       </div>
 
-      <table className="w-full">
-        <thead>
-          <tr>
-            <th>Seller</th>
-            <th>Toy Name</th>
-            <th>Sub-category</th>
-            <th>Price</th>
-            <th>Available Quantity</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {toys.map((toy) => (
-            <tr key={toy.id}>
-              <td>{toy.seller || "N/A"}</td>
-              <td>{toy.name}</td>
-              <td>{toy.subCategory}</td>
-              <td>${toy.price}</td>
-              <td>{toy.quantity}</td>
-              <td>
-                <button
-                  onClick={() => handleViewDetails(toy.id)}
-                  className="px-2 py-1 text-white bg-blue-500 rounded-md"
-                >
-                  View Details
-                </button>
-              </td>
+      <div className="overflow-x-auto">
+        <table className="w-full">
+          <thead>
+            <tr>
+              <th>Seller</th>
+              <th>Toy Name</th>
+              <th>Sub-category</th>
+              <th>Price</th>
+              <th>Available Quantity</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody className="text-center">
+            {toys.map((toy) => (
+              <tr key={toy.id}>
+                <td className="md:py-3 py-6">{toy.seller || "N/A"}</td>
+                <td>{toy.name}</td>
+                <td>{toy.subCategory}</td>
+                <td>${toy.price}</td>
+                <td>{toy.quantity}</td>
+                <td>
+                  <button
+                    onClick={() => handleViewDetails(toy.id)}
+                    className="px-3 py-2 text-white bg-blue-500 rounded-md "
+                  >
+                    View Details
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
