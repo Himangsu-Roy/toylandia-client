@@ -36,7 +36,7 @@ function ShopByCategory() {
       rating: "4.2",
       details: "Toy 2 details...",
     },
-    // Add more toys as needed
+    
   ];
 
   return (
