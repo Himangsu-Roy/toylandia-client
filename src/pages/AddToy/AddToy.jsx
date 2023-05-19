@@ -40,7 +40,7 @@ function AddToy() {
             name="pictureURL"
             value={formData.pictureURL}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 bg-white"
           />
         </div>
         <div className="mb-6">
@@ -53,7 +53,7 @@ function AddToy() {
             name="name"
             value={formData.name}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 bg-white"
           />
         </div>
         <div className="mb-6">
@@ -66,7 +66,7 @@ function AddToy() {
             name="sellerName"
             value={formData.sellerName}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 bg-white"
           />
         </div>
         <div className="mb-6">
@@ -79,7 +79,7 @@ function AddToy() {
             name="sellerEmail"
             value={formData.sellerEmail}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 bg-white"
           />
         </div>
         <div className="mb-6">
@@ -92,7 +92,7 @@ function AddToy() {
             name="subCategory"
             value={formData.subCategory}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 bg-white"
           />
         </div>
         <div className="mb-6">
@@ -105,7 +105,7 @@ function AddToy() {
             name="price"
             value={formData.price}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 bg-white"
           />
         </div>
         <div className="mb-6">
@@ -118,7 +118,7 @@ function AddToy() {
             name="rating"
             value={formData.rating}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 bg-white"
           />
         </div>
         <div className="mb-6">
@@ -131,7 +131,7 @@ function AddToy() {
             name="quantity"
             value={formData.quantity}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 bg-white"
           />
         </div>
         <div className="mb-6">
@@ -143,7 +143,7 @@ function AddToy() {
             name="description"
             value={formData.description}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 bg-white"
           ></textarea>
         </div>
         <button
