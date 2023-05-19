@@ -1,14 +1,17 @@
 import React from "react";
 import { Menu, X } from "lucide-react";
 import logo from "../../assets/attachment_80402256-removebg-preview (1).png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  const location = useLocation();
+  // const path = location.pathname;
+  const isSignInPage = location.pathname === "/login";
+  const isRegisterPage = location.pathname === "/register";
 
   const signOut = () => {
     logOut()
@@ -83,6 +86,7 @@ const Header = () => {
               alt=""
               title={user.displayName}
             />
+
             <div className="hidden lg:block ml-4">
               <Link to="" onClick={signOut}>
                 <button
@@ -95,7 +99,7 @@ const Header = () => {
             </div>
           </>
         ) : (
-          <div className="hidden lg:block">
+          <div className="hidden lg:block ml-auto">
             <Link to="/register">
               <button
                 type="button"
