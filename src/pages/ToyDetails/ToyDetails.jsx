@@ -32,6 +32,8 @@ function ToyDetails() {
       {isModalOpen && (
         <Modal onClose={handleCloseModal}>
           {/* Display the toy details in the modal */}
+          <h1>Toy Details Page</h1>
+
           <h2>Toy Details</h2>
           <p>Toy ID: {id}</p>
           {/* Include other details like picture, name, seller name, etc. */}

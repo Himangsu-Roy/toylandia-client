@@ -1,7 +1,13 @@
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 function ShopByCategory() {
+  const {user} = useContext(AuthContext)
+  const navigate = useNavigate();
+
   const categories = [
     {
       name: "Math Toys",
@@ -23,6 +29,7 @@ function ShopByCategory() {
 
   const toys = [
     {
+      id: 1,
       picture: "toy1.jpg",
       name: "Toy 1",
       price: "$9.99",
@@ -30,14 +37,26 @@ function ShopByCategory() {
       details: "Toy 1 details...",
     },
     {
+      id: 2,
       picture: "toy2.jpg",
       name: "Toy 2",
       price: "$14.99",
       rating: "4.2",
       details: "Toy 2 details...",
     },
-    
   ];
+
+
+
+   const handleViewDetails = (id) => {
+
+     if (!user) {
+       navigate("/login");
+     } else {
+       // Redirect to the details page with the toy ID
+       navigate(`/hometoydetails/${id}`);
+     }
+   };
 
   return (
     <div className="container mx-auto py-10">
@@ -77,7 +96,10 @@ function ShopByCategory() {
                           Rating: {toy.rating}
                         </p>
                       </div>
-                      <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
+                      <button
+                        onClick={() => handleViewDetails(toy.id)}
+                        className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                      >
                         View Details
                       </button>
                     </div>

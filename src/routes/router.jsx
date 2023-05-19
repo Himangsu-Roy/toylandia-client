@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import HomeToyDetails from "../components/HomeToyDetails/HomeToyDetails";
 import AddToy from "../pages/AddToy/AddToy";
 import AllToys from "../pages/AllToys/AllToys";
 import Blogs from "../pages/Blogs/Blogs";
@@ -30,6 +31,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRouter>
             <ToyDetails></ToyDetails>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/hometoydetails/:id",
+        element: (
+          <PrivateRouter>
+            <HomeToyDetails></HomeToyDetails>
           </PrivateRouter>
         ),
       },

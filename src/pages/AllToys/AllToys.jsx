@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const toysData = [
   // Sample toy data, replace with actual toy data from your data source
@@ -13,7 +15,55 @@ const toysData = [
   },
   {
     id: 2,
+    seller: "Fane",
+    name: "Toy 2",
+    subCategory: "Science",
+    price: 20,
+    quantity: 3,
+  },
+  {
+    id: 3,
+    seller: "Yane",
+    name: "Toy 2",
+    subCategory: "Science",
+    price: 20,
+    quantity: 3,
+  },
+  {
+    id: 4,
+    seller: "Kane",
+    name: "Toy 2",
+    subCategory: "Science",
+    price: 20,
+    quantity: 3,
+  },
+  {
+    id: 5,
+    seller: "Dane",
+    name: "Toy 2",
+    subCategory: "Science",
+    price: 20,
+    quantity: 3,
+  },
+  {
+    id: 6,
     seller: "Jane",
+    name: "Toy 2",
+    subCategory: "Science",
+    price: 20,
+    quantity: 3,
+  },
+  {
+    id: 7,
+    seller: "Mane",
+    name: "Toy 2",
+    subCategory: "Science",
+    price: 20,
+    quantity: 3,
+  },
+  {
+    id: 8,
+    seller: "Gane",
     name: "Toy 2",
     subCategory: "Science",
     price: 20,
@@ -23,6 +73,7 @@ const toysData = [
 ];
 
 const AllToys = () => {
+  const {user} = useContext(AuthContext)
   const [searchTerm, setSearchTerm] = useState("");
   const [toys, setToys] = useState(toysData);
   const navigate = useNavigate();
@@ -39,12 +90,9 @@ const AllToys = () => {
   };
 
   const handleViewDetails = (id) => {
-    const isAuthenticated = true; // Replace with your actual authentication logic
-
-    if (!isAuthenticated) {
+    if (!user) {
       navigate("/login");
     } else {
-      // Redirect to the details page with the toy ID
       navigate(`/toy/${id}`);
     }
   };
