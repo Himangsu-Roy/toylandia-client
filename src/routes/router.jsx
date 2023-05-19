@@ -6,10 +6,10 @@ import Blogs from "../pages/Blogs/Blogs";
 import Error from "../pages/Error/Error";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
+import MyToys from "../pages/MyToys/MyToys";
 import Register from "../pages/Register/Register";
 import ShopByCategory from "../pages/ShopByCategory/ShopByCategory";
 import ToyDetails from "../pages/ToyDetails/ToyDetails";
-import PrivateRoute from "./PrivateRoute";
 import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
@@ -25,6 +25,14 @@ const router = createBrowserRouter([
       {
         path: "/alltoys",
         element: <AllToys></AllToys>,
+      },
+      {
+        path: "/mytoys",
+        element: (
+          <PrivateRouter>
+            <MyToys></MyToys>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/toy/:id",

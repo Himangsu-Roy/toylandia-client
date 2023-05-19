@@ -25,7 +25,7 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         const loggedUser = result.user;
-        console.log(loggedUser);
+        // console.log(loggedUser);
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -42,8 +42,9 @@ const Login = () => {
         const user = result.user;
         if (user) {
           navigate(from, { replace: true });
+          console.log(location)
         }
-    })
+      })
   };
 
   return (

@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Modal from "../../components/Modal/Modal";
 import { AuthContext } from "../../contexts/AuthProvider";
+import Swal from "sweetalert2";
+
 
 
 function ToyDetails() {
@@ -17,7 +19,12 @@ function ToyDetails() {
     if (user) {
       setIsModalOpen(true);
     } else {
-      alert("You have to log in first to view details");
+      Swal.fire({
+        title: "Error!",
+        text: "You have to log in first to view details",
+        icon: "error",
+        confirmButtonText: "Cool",
+      });
       navigate("/login");
     }
   };

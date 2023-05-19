@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
 const toysData = [
+  
   // Sample toy data, replace with actual toy data from your data source
   {
     id: 1,
@@ -77,6 +78,7 @@ const AllToys = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [toys, setToys] = useState(toysData);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSearch = (e) => {
     const value = e.target.value;
@@ -92,7 +94,9 @@ const AllToys = () => {
   const handleViewDetails = (id) => {
     if (!user) {
       navigate("/login");
+      console.log(location)
     } else {
+
       navigate(`/toy/${id}`);
     }
   };
