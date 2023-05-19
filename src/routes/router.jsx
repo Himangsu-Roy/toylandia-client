@@ -7,6 +7,9 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import ShopByCategory from "../pages/ShopByCategory/ShopByCategory";
+import ToyDetails from "../pages/ToyDetails/ToyDetails";
+import PrivateRoute from "./PrivateRoute";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +24,14 @@ const router = createBrowserRouter([
       {
         path: "/alltoys",
         element: <AllToys></AllToys>,
+      },
+      {
+        path: "/toy/:id",
+        element: (
+          <PrivateRouter>
+            <ToyDetails></ToyDetails>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/addatoy",
