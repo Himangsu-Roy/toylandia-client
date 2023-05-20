@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import { useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLoaderData } from "react-router-dom";
 import Modal from "../../components/Modal/Modal";
 import { AuthContext } from "../../contexts/AuthProvider";
 import Swal from "sweetalert2";
 
-
-
 function ToyDetails() {
-    const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(true);
-
-  
+    const [isModalOpen, setIsModalOpen] = useState(true);
+    const toy  = useLoaderData();
+    console.log(toy)
+    console.log(id)
 
   const handleViewDetails = () => {
     if (user) {

@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import { useContext } from "react";
+import { useEffect } from "react";
+import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
+import Swal from "sweetalert2";
 
 // const toys = [
 //   {
@@ -28,38 +33,49 @@ import React, { useState } from "react";
 // ];
 
 const MyToys = () => {
+  const { user } = useContext(AuthContext);
   const [toys, setToys] = useState([
-    {
-      id: 1,
-      seller: "John",
-      name: "Toy 1",
-      subCategory: "Educational",
-      price: 10,
-      quantity: 5,
-    },
-    {
-      id: 2,
-      seller: "Fane",
-      name: "Toy 2",
-      subCategory: "Science",
-      price: 20,
-      quantity: 3,
-    },
-    {
-      id: 3,
-      seller: "Yane",
-      name: "Toy 2",
-      subCategory: "Science",
-      price: 20,
-      quantity: 3,
-    },
+    // {
+    //   id: 1,
+    //   seller: "John",
+    //   name: "Toy 1",
+    //   subCategory: "Educational",
+    //   price: 10,
+    //   quantity: 5,
+    // },
+    // {
+    //   id: 2,
+    //   seller: "Fane",
+    //   name: "Toy 2",
+    //   subCategory: "Science",
+    //   price: 20,
+    //   quantity: 3,
+    // },
+    // {
+    //   id: 3,
+    //   seller: "Yane",
+    //   name: "Toy 2",
+    //   subCategory: "Science",
+    //   price: 20,
+    //   quantity: 3,
+    // },
   ]); // State to store the user's toys
+
+  console.log(user);
+  useEffect(() => {
+    fetch(`http://localhost:5000/mytoys/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setToys(data);
+      });
+  }, [user]);
+  console.log(toys);
 
   // Function to handle toy update
   const handleUpdateToy = (toyId, updatedToyData) => {
     // Update the toy with the updated data in the toys state
     const updatedToys = toys.map((toy) => {
-      if (toy.id === toyId) {
+      if (toy._id === toyId) {
         return { ...toy, ...updatedToyData };
       }
       return toy;
@@ -70,14 +86,39 @@ const MyToys = () => {
   // Function to handle toy deletion
   const handleDeleteToy = (toyId) => {
     // Show a confirmation dialog and delete the toy if confirmed
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this toy?"
-    );
-    if (confirmDelete) {
-      // Remove the toy from the toys state
-      const updatedToys = toys.filter((toy) => toy.id !== toyId);
-      setToys(updatedToys);
-    }
+    // const confirmDelete = window.confirm(
+    //   "Are you sure you want to delete this toy?"
+    //   );
+
+    Swal.fire({
+      title: "Are you sure you want to delete this toy?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/toys/${toyId}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Your toy has been deleted.", "success");
+              const remainningToys = toys.filter((toy) => toy._id !== toyId);
+              setToys(remainningToys);
+            }
+          });
+      }
+    });
+
+    // if (confirmDelete) {
+    //   // Remove the toy from the toys state
+    //   const updatedToys = toys.filter((toy) => toy._id !== toyId);
+    //   setToys(updatedToys);
+    // }
   };
 
   return (
@@ -103,7 +144,7 @@ const MyToys = () => {
                   <button
                     className="mr-2 bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded"
                     onClick={() =>
-                      handleUpdateToy(toy.id, {
+                      handleUpdateToy(toy._id, {
                         /* Updated toy data */
                       })
                     }
@@ -112,7 +153,7 @@ const MyToys = () => {
                   </button>
                   <button
                     className="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded"
-                    onClick={() => handleDeleteToy(toy.id)}
+                    onClick={() => handleDeleteToy(toy._id)}
                   >
                     Delete
                   </button>

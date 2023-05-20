@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import HomeToyDetails from "../components/HomeToyDetails/HomeToyDetails";
+import HomeLayout from "../layouts/HomeLayout/HomeLayout";
 import AddToy from "../pages/AddToy/AddToy";
 import AllToys from "../pages/AllToys/AllToys";
 import Blogs from "../pages/Blogs/Blogs";
@@ -8,7 +9,6 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import MyToys from "../pages/MyToys/MyToys";
 import Register from "../pages/Register/Register";
-import ShopByCategory from "../pages/ShopByCategory/ShopByCategory";
 import ToyDetails from "../pages/ToyDetails/ToyDetails";
 import PrivateRouter from "./PrivateRouter";
 
@@ -20,11 +20,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <ShopByCategory></ShopByCategory>,
+        element: <HomeLayout></HomeLayout>,
       },
       {
         path: "/alltoys",
         element: <AllToys></AllToys>,
+        loader: () => fetch("http://localhost:5000/alltoys"),
       },
       {
         path: "/mytoys",
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
             <MyToys></MyToys>
           </PrivateRouter>
         ),
+        
       },
       {
         path: "/toy/:id",
@@ -41,6 +43,8 @@ const router = createBrowserRouter([
             <ToyDetails></ToyDetails>
           </PrivateRouter>
         ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/toydetails/${params.id}`),
       },
       {
         path: "/hometoydetails/:id",

@@ -1,83 +1,89 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 
-const toysData = [
-  // Sample toy data, replace with actual toy data from your data source
-  {
-    id: 1,
-    seller: "John",
-    name: "Toy 1",
-    subCategory: "Educational",
-    price: 10,
-    quantity: 5,
-  },
-  {
-    id: 2,
-    seller: "Fane",
-    name: "Toy 2",
-    subCategory: "Science",
-    price: 20,
-    quantity: 3,
-  },
-  {
-    id: 3,
-    seller: "Yane",
-    name: "Toy 2",
-    subCategory: "Science",
-    price: 20,
-    quantity: 3,
-  },
-  {
-    id: 4,
-    seller: "Kane",
-    name: "Toy 2",
-    subCategory: "Science",
-    price: 20,
-    quantity: 3,
-  },
-  {
-    id: 5,
-    seller: "Dane",
-    name: "Toy 2",
-    subCategory: "Science",
-    price: 20,
-    quantity: 3,
-  },
-  {
-    id: 6,
-    seller: "Jane",
-    name: "Toy 2",
-    subCategory: "Science",
-    price: 20,
-    quantity: 3,
-  },
-  {
-    id: 7,
-    seller: "Mane",
-    name: "Toy 2",
-    subCategory: "Science",
-    price: 20,
-    quantity: 3,
-  },
-  {
-    id: 8,
-    seller: "Gane",
-    name: "Toy 2",
-    subCategory: "Science",
-    price: 20,
-    quantity: 3,
-  },
-  // Add more toy objects as needed
-];
+// const toysData = [
+//   // Sample toy data, replace with actual toy data from your data source
+//   {
+//     id: 1,
+//     seller: "John",
+//     name: "Toy 1",
+//     subCategory: "Educational",
+//     price: 10,
+//     quantity: 5,
+//   },
+//   {
+//     id: 2,
+//     seller: "Fane",
+//     name: "Toy 2",
+//     subCategory: "Science",
+//     price: 20,
+//     quantity: 3,
+//   },
+//   {
+//     id: 3,
+//     seller: "Yane",
+//     name: "Toy 2",
+//     subCategory: "Science",
+//     price: 20,
+//     quantity: 3,
+//   },
+//   {
+//     id: 4,
+//     seller: "Kane",
+//     name: "Toy 2",
+//     subCategory: "Science",
+//     price: 20,
+//     quantity: 3,
+//   },
+//   {
+//     id: 5,
+//     seller: "Dane",
+//     name: "Toy 2",
+//     subCategory: "Science",
+//     price: 20,
+//     quantity: 3,
+//   },
+//   {
+//     id: 6,
+//     seller: "Jane",
+//     name: "Toy 2",
+//     subCategory: "Science",
+//     price: 20,
+//     quantity: 3,
+//   },
+//   {
+//     id: 7,
+//     seller: "Mane",
+//     name: "Toy 2",
+//     subCategory: "Science",
+//     price: 20,
+//     quantity: 3,
+//   },
+//   {
+//     id: 8,
+//     seller: "Gane",
+//     name: "Toy 2",
+//     subCategory: "Science",
+//     price: 20,
+//     quantity: 3,
+//   },
+//   // Add more toy objects as needed
+// ];
+
+
+
 
 const AllToys = () => {
-  const { user } = useContext(AuthContext);
+  const toysData = useLoaderData()
+  const { user, loading } = useContext(AuthContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [toys, setToys] = useState(toysData);
   const navigate = useNavigate();
   const location = useLocation();
+
+  console.log(toys)
 
   const handleSearch = (e) => {
     const value = e.target.value;
@@ -90,14 +96,41 @@ const AllToys = () => {
     setToys(filteredToys);
   };
 
-  const handleViewDetails = (id) => {
-    if (!user) {
-      navigate("/login");
-      console.log(location);
+  const handleViewDetails = (_id) => {
+    if (user) {
+      navigate(`/toy/${_id}`);
     } else {
-      navigate(`/toy/${id}`);
+      if (loading) {
+        return (
+          <div className="flex justify-center items-center h-screen">
+            <div className="relative">
+              <div className="w-12 h-12 rounded-full absolute border-8 border-solid border-gray-200"></div>
+              <div className="w-12 h-12 rounded-full animate-spin absolute border-8 border-solid border-purple-500 border-t-transparent"></div>
+            </div>
+          </div>
+        );
+      } else {
+        
+        // navigate("/login");
+        // console.log(location);
+        const options = {
+          state: { from: location },
+          replace: true,
+        };
+        console.log(navigate);
+        navigate("/login", options);
+      }
+
     }
   };
+
+
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/alltoys")
+  //     .then(res => res.json())
+  //   .then(data => setToys(data))
+  // }, [])
+
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -128,18 +161,20 @@ const AllToys = () => {
           <tbody className="text-center">
             {toys.map((toy) => (
               <tr key={toy.id}>
-                <td className="md:py-3 py-6">{toy.seller || "N/A"}</td>
+                <td className="md:py-3 py-6">{toy.sellerName || "N/A"}</td>
                 <td>{toy.name}</td>
                 <td>{toy.subCategory}</td>
                 <td>${toy.price}</td>
                 <td>{toy.quantity}</td>
                 <td>
-                  <button
-                    onClick={() => handleViewDetails(toy.id)}
-                    className="px-3 py-2 text-white bg-blue-500 rounded-md "
-                  >
-                    View Details
-                  </button>
+                  <Link to={`/toy/${toy._id}`}>
+                    <button
+                      onClick={() => handleViewDetails(toy._id)}
+                      className="px-3 py-2 text-white bg-blue-500 rounded-md "
+                    >
+                      View Details
+                    </button>
+                  </Link>
                 </td>
               </tr>
             ))}

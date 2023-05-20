@@ -24,12 +24,23 @@ function AddToy() {
     e.preventDefault();
     // Handle form submission logic here
     console.log(formData);
+    fetch("http://localhost:5000/addatoy", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
   };
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 px-3">
       <h1 className="text-3xl font-bold mb-6">Add A Toy</h1>
-      <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+      <form onSubmit={handleSubmit} className="max-w-3xl mx-auto grid md:grid-cols-2 gap-4">
         <div className="mb-6">
           <label className="block mb-2 font-bold" htmlFor="pictureURL">
             Picture URL of the toy
@@ -74,6 +85,7 @@ function AddToy() {
             Seller Email
           </label>
           <input
+            required
             type="email"
             id="sellerEmail"
             name="sellerEmail"
@@ -134,7 +146,7 @@ function AddToy() {
             className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 bg-white"
           />
         </div>
-        <div className="mb-6">
+        <div className="mb-6 col-span-full">
           <label className="block mb-2 font-bold" htmlFor="description">
             Detail description
           </label>
@@ -148,7 +160,7 @@ function AddToy() {
         </div>
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded-md"
+          className="bg-blue-500 text-white px-4 py-2 rounded-md col-span-full max-w-[15rem]"
         >
           Add Toy
         </button>
