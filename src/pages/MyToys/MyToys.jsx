@@ -1,65 +1,15 @@
 import React, { useState } from "react";
 import { useContext } from "react";
 import { useEffect } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import Swal from "sweetalert2";
+import UpdateToy from "../UpdateToy/UpdateToy";
 
-// const toys = [
-//   {
-//     id: 1,
-//     seller: "John",
-//     name: "Toy 1",
-//     subCategory: "Educational",
-//     price: 10,
-//     quantity: 5,
-//   },
-//   {
-//     id: 2,
-//     seller: "Fane",
-//     name: "Toy 2",
-//     subCategory: "Science",
-//     price: 20,
-//     quantity: 3,
-//   },
-//   {
-//     id: 3,
-//     seller: "Yane",
-//     name: "Toy 2",
-//     subCategory: "Science",
-//     price: 20,
-//     quantity: 3,
-//   },
-// ];
 
 const MyToys = () => {
   const { user } = useContext(AuthContext);
-  const [toys, setToys] = useState([
-    // {
-    //   id: 1,
-    //   seller: "John",
-    //   name: "Toy 1",
-    //   subCategory: "Educational",
-    //   price: 10,
-    //   quantity: 5,
-    // },
-    // {
-    //   id: 2,
-    //   seller: "Fane",
-    //   name: "Toy 2",
-    //   subCategory: "Science",
-    //   price: 20,
-    //   quantity: 3,
-    // },
-    // {
-    //   id: 3,
-    //   seller: "Yane",
-    //   name: "Toy 2",
-    //   subCategory: "Science",
-    //   price: 20,
-    //   quantity: 3,
-    // },
-  ]); // State to store the user's toys
+  const [toys, setToys] = useState([]);
 
   console.log(user);
   useEffect(() => {
@@ -69,26 +19,14 @@ const MyToys = () => {
         setToys(data);
       });
   }, [user]);
-  console.log(toys);
+  
 
-  // Function to handle toy update
-  const handleUpdateToy = (toyId, updatedToyData) => {
-    // Update the toy with the updated data in the toys state
-    const updatedToys = toys.map((toy) => {
-      if (toy._id === toyId) {
-        return { ...toy, ...updatedToyData };
-      }
-      return toy;
-    });
-    setToys(updatedToys);
+  const handleUpdateToy = (id) => {
+    <UpdateToy id={id}></UpdateToy>;
   };
 
   // Function to handle toy deletion
   const handleDeleteToy = (toyId) => {
-    // Show a confirmation dialog and delete the toy if confirmed
-    // const confirmDelete = window.confirm(
-    //   "Are you sure you want to delete this toy?"
-    //   );
 
     Swal.fire({
       title: "Are you sure you want to delete this toy?",
@@ -113,12 +51,6 @@ const MyToys = () => {
           });
       }
     });
-
-    // if (confirmDelete) {
-    //   // Remove the toy from the toys state
-    //   const updatedToys = toys.filter((toy) => toy._id !== toyId);
-    //   setToys(updatedToys);
-    // }
   };
 
   return (
@@ -136,21 +68,20 @@ const MyToys = () => {
           </thead>
           <tbody className="text-center">
             {toys.map((toy) => (
-              <tr key={toy.id}>
+              <tr key={toy._id}>
                 <td className="py-2 px-4 border-b">{toy.name}</td>
                 <td className="py-2 px-4 border-b">${toy.price}</td>
                 <td className="py-2 px-4 border-b">{toy.quantity}</td>
                 <td className="py-2 px-4 border-b">
-                  <button
-                    className="mr-2 bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded"
-                    onClick={() =>
-                      handleUpdateToy(toy._id, {
-                        /* Updated toy data */
-                      })
-                    }
-                  >
-                    Update
-                  </button>
+                  <Link to={`/update/${toy._id}`}>
+                    <button
+                      className="mr-2 bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded"
+                      onClick={() => handleUpdateToy(toy._id)}
+                    >
+                      Edit
+                    </button>
+                  </Link>
+
                   <button
                     className="bg-red-500 hover:bg-red-600 text-white py-1 px-2 rounded"
                     onClick={() => handleDeleteToy(toy._id)}
@@ -164,41 +95,6 @@ const MyToys = () => {
         </table>
       </div>
     </div>
-
-    // <div>
-    //   <h1>My Toys</h1>
-    //   <table>
-    //     <thead>
-    //       <tr>
-    //         <th>Name</th>
-    //         <th>Price</th>
-    //         <th>Available Quantity</th>
-    //         <th>Actions</th>
-    //       </tr>
-    //     </thead>
-    //     <tbody>
-    //       {toys.map((toy) => (
-    //         <tr key={toy.id}>
-    //           <td>{toy.name}</td>
-    //           <td>{toy.price}</td>
-    //           <td>{toy.quantity}</td>
-    //           <td>
-    //             <button
-    //               onClick={() =>
-    //                 handleUpdateToy(toy.id, {
-    //                   /* Updated toy data */
-    //                 })
-    //               }
-    //             >
-    //               Update
-    //             </button>
-    //             <button onClick={() => handleDeleteToy(toy.id)}>Delete</button>
-    //           </td>
-    //         </tr>
-    //       ))}
-    //     </tbody>
-    //   </table>
-    // </div>
   );
 };
 

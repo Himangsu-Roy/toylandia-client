@@ -1,54 +1,48 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import "react-tabs/style/react-tabs.css";
 import { AuthContext } from "../../contexts/AuthProvider";
 import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 
-function ShopByCategory() {
+const ShopByCategory = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const [categories, setCategories] = useState([]);
+  
 
-  const categories = [
-    {
-      name: "Math Toys",
-      subCategories: ["Subcategory 1", "Subcategory 2"],
-    },
-    {
-      name: "Language Toys",
-      subCategories: ["Subcategory 3", "Subcategory 4"],
-    },
-    {
-      name: "Engineering Toys",
-      subCategories: ["Subcategory 5", "Subcategory 6"],
-    },
-    {
-      name: "Science Toys",
-      subCategories: ["Subcategory 7", "Subcategory 8"],
-    },
-  ];
+  useEffect(() => {
+    fetchToys();
+  }, []);
 
-  const toys = [
-    {
-      id: 1,
-      picture: "toy1.jpg",
-      name: "Toy 1",
-      price: "$9.99",
-      rating: "4.5",
-      details: "Toy 1 details...",
-    },
-    {
-      id: 2,
-      picture: "toy2.jpg",
-      name: "Toy 2",
-      price: "$14.99",
-      rating: "4.2",
-      details: "Toy 2 details...",
-    },
-  ];
+  const fetchToys = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/alltoys");
+      const data = await response.json();
+      setCategories(groupToysByCategory(data));
+    } catch (error) {
+      console.error("Failed to fetch toys:", error);
+    }
+  };
 
-  const handleViewDetails = (id) => {
+  const groupToysByCategory = (toys) => {
+    const groupedCategories = {};
+    toys.forEach((toy) => {
+      const category = toy.SubCategory;
+      if (!groupedCategories[category]) {
+        groupedCategories[category] = [];
+      }
+
+      groupedCategories[category].push(toy);
+    });
+    return groupedCategories;
+  };
+
+  const visibleCategories = Object.keys(categories).slice(0, 3);
+
+  const handleViewDetails = (_id) => {
     if (!user) {
       Swal.fire({
         title: "Error!",
@@ -69,65 +63,59 @@ function ShopByCategory() {
       console.log(navigate);
       navigate("/login", options);
     } else {
-      // Redirect to the details page with the toy ID
-      navigate(`/hometoydetails/${id}`);
+      navigate(`/hometoydetails/${_id}`);
     }
   };
 
   return (
-    <div className="container mx-auto py-10">
-      <h1 className="text-3xl font-bold mb-6">Shop by Category</h1>
-      <Tabs>
-        <TabList className="flex flex-wrap mb-4 gap-3">
-          {categories.map((category, index) => (
-            <Tab
-              key={index}
-              className=" py-2 px-4 bg-gray-200 rounded-md cursor-pointer hover:bg-gray-300"
-            >
-              {category.name}
-            </Tab>
-          ))}
-        </TabList>
-
-        {categories.map((category, index) => (
-          <TabPanel key={index}>
-            {
-              // category.subCategories.map((subCategory, index) => (
-              // <div key={index} className="mb-6">
-              //   <h2 className="text-lg font-bold mb-4">{subCategory}</h2>
-              <div className="grid md:grid-cols-2 gap-4">
-                {toys.map((toy, index) => (
-                  <div
-                    key={index}
-                    className="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between"
-                  >
-                    <img
-                      src={toy.picture}
-                      alt={toy.name}
-                      className="w-full h-40 object-cover rounded-md mb-4"
-                    />
-                    <div>
-                      <h3 className="text-lg font-bold mb-2">{toy.name}</h3>
-                      <p className="text-gray-600 mb-2">Price: {toy.price}</p>
-                      <p className="text-gray-600 mb-4">Rating: {toy.rating}</p>
-                    </div>
-
-                    <button
-                      onClick={() => handleViewDetails(toy.id)}
-                      className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                    >
-                      View Details
-                    </button>
-                  </div>
-                ))}
-              </div>
-              // </div>
-            }
-          </TabPanel>
+    <Tabs className="max-w-3xl mx-auto">
+      <TabList className="flex space-x-4 mb-6">
+        {visibleCategories.map((category) => (
+          <Tab
+            key={category}
+            className="px-4 py-2 rounded-full bg-gray-200 text-gray-600 hover:bg-indigo-500 hover:text-white cursor-pointer"
+          >
+            {category}
+          </Tab>
         ))}
-      </Tabs>
-    </div>
+      </TabList>
+
+      {visibleCategories.map((category) => (
+        <TabPanel key={category}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
+            {categories[category].slice(0, 2).map((toy) => (
+              <div
+                className="bg-white border border-gray-300 rounded-lg p-4 flex flex-col justify-between"
+                key={toy._id}
+              >
+                <img
+                  src={toy.pictureURL}
+                  alt={toy.toyName}
+                  className="w-full h-48 object-cover rounded-lg mb-4"
+                />
+                <h3 className="text-xl font-semibold mb-2">{toy.toyName}</h3>
+                <p className="text-gray-600 mb-2">${toy.Price}</p>
+                <div className="flex items-center mb-2">
+                  <span className="mr-1 text-yellow-400">&#9733;</span>
+                  <span className="text-gray-600">{toy.Rating}</span>
+                </div>
+                <button
+                  onClick={() => handleViewDetails(toy._id)}
+                  className="bg-indigo-500 text-white rounded-full px-4 py-2 mt-4"
+                >
+                  View Details
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {categories[category].length === 0 && (
+            <p className="text-center">No toys available in this category.</p>
+          )}
+        </TabPanel>
+      ))}
+    </Tabs>
   );
-}
+};
 
 export default ShopByCategory;

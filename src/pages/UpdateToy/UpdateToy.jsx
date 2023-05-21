@@ -1,16 +1,35 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { useContext, useState } from "react";
+import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthProvider";
 
-function AddToy() {
+function UpdateToy() {
+  const toy = useLoaderData();
+  console.log(toy);
+    const {
+      _id,
+    pictureURL,
+    name,
+    sellerName,
+    sellerEmail,
+    subCategory,
+    price,
+    rating,
+    quantity,
+    description,
+  } = toy;
+    const { user } = useContext(AuthContext);
+    console.log(user)
   const [formData, setFormData] = useState({
-    pictureURL: "",
-    name: "",
-    sellerName: "",
-    sellerEmail: "",
-    subCategory: "",
-    price: "",
-    rating: "",
-    quantity: "",
-    description: "",
+    pictureURL: pictureURL,
+    name: name,
+    sellerName: sellerName,
+    sellerEmail: sellerEmail,
+    subCategory: subCategory,
+    price: price,
+    rating: rating,
+    quantity: quantity,
+    description: description,
   });
 
   const handleInputChange = (e) => {
@@ -20,12 +39,12 @@ function AddToy() {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log(formData);
-    fetch("http://localhost:5000/addatoy", {
-      method: "POST",
+
+  // Function to handle toy update
+    const handleUpdateToy = (e) => {
+        e.preventDefault();
+    fetch(`http://localhost:5000/mytoy/${_id}`, {
+      method: "PUT",
       headers: {
         "content-type": "application/json",
       },
@@ -37,11 +56,12 @@ function AddToy() {
       });
   };
 
+
   return (
     <div className="container mx-auto py-10 px-3">
-      <h1 className="text-3xl font-bold mb-6">Add A Toy</h1>
+      <h1 className="text-3xl font-bold mb-6">Update A Toy</h1>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleUpdateToy}
         className="max-w-3xl mx-auto grid md:grid-cols-2 gap-4"
       >
         <div className="mb-6">
@@ -66,7 +86,6 @@ function AddToy() {
             id="name"
             name="name"
             value={formData.name}
-            defaultValue={formData.name}
             onChange={handleInputChange}
             className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 bg-white"
           />
@@ -166,11 +185,12 @@ function AddToy() {
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded-md col-span-full max-w-[15rem]"
         >
-          Add Toy
+          Update Toy
         </button>
       </form>
     </div>
   );
 }
 
-export default AddToy;
+export default UpdateToy;
+
