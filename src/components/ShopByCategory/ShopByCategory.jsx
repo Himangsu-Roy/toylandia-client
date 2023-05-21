@@ -11,7 +11,7 @@ const ShopByCategory = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [categories, setCategories] = useState([]);
-  
+
 
   useEffect(() => {
     fetchToys();
@@ -68,7 +68,7 @@ const ShopByCategory = () => {
   };
 
   return (
-    <Tabs className="max-w-3xl mx-auto">
+    <Tabs className="w-full mx-auto">
       <TabList className="flex space-x-4 mb-6">
         {visibleCategories.map((category) => (
           <Tab

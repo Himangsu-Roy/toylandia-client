@@ -4,6 +4,7 @@ import logo from "../../assets/attachment_80402256-removebg-preview (1).png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
+import useTitle from "../../utils/useTitle";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -51,6 +52,8 @@ const Header = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  useTitle("Home")
 
   return (
     <div className="relative w-full bg-white">
