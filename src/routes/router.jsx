@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       {
         path: "/alltoys",
         element: <AllToys></AllToys>,
-        loader: () => fetch("http://localhost:5000/alltoys"),
+        loader: () => fetch("https://toy-landia-server.vercel.app/alltoys"),
       },
       {
         path: "/mytoys",
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
           </PrivateRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/mytoy/${params.id}`),
+          fetch(`https://toy-landia-server.vercel.app/mytoy/${params.id}`),
       },
       {
         path: "/toy/:id",
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
           </PrivateRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/toydetails/${params.id}`),
+          fetch(`https://toy-landia-server.vercel.app/toydetails/${params.id}`),
       },
       {
         path: "/hometoydetails/:id",
@@ -66,7 +66,7 @@ const router = createBrowserRouter([
           </PrivateRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/toydetails/${params.id}`),
+          fetch(`https://toy-landia-server.vercel.app/toydetails/${params.id}`),
       },
       {
         path: "/addatoy",

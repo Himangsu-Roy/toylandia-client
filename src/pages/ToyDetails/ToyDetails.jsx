@@ -1,68 +1,27 @@
-// import React, { useState } from "react";
-// import { useContext } from "react";
-// import { useParams, useNavigate, useLoaderData } from "react-router-dom";
-// import Modal from "../../components/Modal/Modal";
-// import { AuthContext } from "../../contexts/AuthProvider";
-// import Swal from "sweetalert2";
-
-// function ToyDetails() {
-//   const { user } = useContext(AuthContext);
-//   const { id } = useParams();
-//   const navigate = useNavigate();
-//   const toy = useLoaderData();
-//   console.log(toy);
-//   console.log(id);
-
-//   //   const handleViewDetails = () => {
-//   //     if (user) {
-//   //       setIsModalOpen(true);
-//   //     } else {
-//   //       Swal.fire({
-//   //         title: "Error!",
-//   //         text: "You have to log in first to view details",
-//   //         icon: "error",
-//   //         confirmButtonText: "Cool",
-//   //       });
-//   //       navigate("/login");
-//   //     }
-//   //   };
-
-//   const handleCloseModal = () => {
-//     setIsModalOpen(false);
-//     navigate(-1);
-//   };
-
-//   return (
-//     <div>
-//       <h1>Toy Details Page</h1>
-//       {/* <button onClick={handleViewDetails}>View Details</button> */}
-
-//       {isModalOpen && (
-//         <Modal onClose={handleCloseModal}>
-//           {/* Display the toy details in the modal */}
-//           <h1>Toy Details Page</h1>
-
-//           <h2>Toy Details</h2>
-//           <p>Toy ID: {id}</p>
-//           {/* Include other details like picture, name, seller name, etc. */}
-//           <button onClick={handleCloseModal}>Close</button>
-//         </Modal>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default ToyDetails;
-
-
 import React from "react";
+import { useState } from "react";
 
-export default function ToyDetails() {
-  const [showModal, setShowModal] = React.useState(false);
+export default function ToyDetails({ toy }) {
+  const [showModal, setShowModal] = useState(false);
+
+  const {
+    description,
+    pictureURL,
+    price,
+    quantity,
+    rating,
+    sellerEmail,
+    sellerName,
+    subCategory,
+    toyName,
+    _id,
+    } = toy;
+    
+
   return (
     <>
       <button
-        className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        className="bg-[#EE552A] text-white active:bg-[#c03b17] font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
         onClick={() => setShowModal(true)}
       >
@@ -87,15 +46,54 @@ export default function ToyDetails() {
                   </button>
                 </div>
                 {/*body*/}
-                <div className="relative p-6 flex-auto">
-                  <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                    I always felt like I could do anything. That’s the main
-                    thing people are controlled by! Thoughts- their perception
-                    of themselves! They're slowed down by their perception of
-                    themselves. If you're taught you can’t do anything, you
-                    won’t do anything. I was taught I could do everything.
-                  </p>
+
+                <div className="bg-gray-100 p-8">
+                  <div className="max-w-4xl mx-auto">
+                    <div className="flex items-center justify-between">
+                      <img
+                        src={pictureURL}
+                        alt={toyName}
+                        className="w-64 h-64 object-cover rounded-lg"
+                      />
+                      <div className="ml-8">
+                        <h2 className="text-3xl font-bold mb-4">{toyName}</h2>
+                        <h3 className="text-lg mb-2">
+                          Category: {subCategory}
+                        </h3>
+                        <p className="text-gray-600 mb-4">{description}</p>
+                        <div className="flex items-center">
+                          <span className="mr-2 text-lg font-bold">Price:</span>
+                          <span className="text-green-500 text-2xl">
+                            ${price}
+                          </span>
+                        </div>
+                        <div className="flex items-center mt-4">
+                          <span className="mr-2 text-lg font-bold">
+                            Quantity:
+                          </span>
+                          <span className="text-gray-600">{quantity}</span>
+                        </div>
+                        <div className="flex items-center mt-4">
+                          <span className="mr-2 text-lg font-bold">
+                            Rating:
+                          </span>
+                          <span className="text-yellow-500">{rating}</span>
+                        </div>
+                        <div className="flex items-center mt-4">
+                          <span className="mr-2 text-lg font-bold">
+                            Seller:
+                          </span>
+                          <span>{sellerName}</span>
+                        </div>
+                        <div className="flex items-center mt-2">
+                          <span className="mr-2 text-lg font-bold">Email:</span>
+                          <span>{sellerEmail}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                   <button
@@ -105,13 +103,6 @@ export default function ToyDetails() {
                   >
                     Close
                   </button>
-                  {/* <button
-                    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    Save Changes
-                  </button> */}
                 </div>
               </div>
             </div>

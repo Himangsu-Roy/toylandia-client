@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
+import useTitle from "../../utils/useTitle";
 
 const Login = () => {
   const { signIn, signInWithGoogle } = useContext(AuthContext);
@@ -42,10 +43,12 @@ const Login = () => {
         const user = result.user;
         if (user) {
           navigate(from, { replace: true });
-          console.log(location)
         }
       })
   };
+
+
+  useTitle("Login")
 
   return (
     <section className="bg-white dark:bg-gray-900">

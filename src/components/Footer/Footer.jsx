@@ -5,15 +5,21 @@ import logo from "../../assets/attachment_80402256-removebg-preview (1).png";
 
 const Footer = () => {
   const productCategories = [
-    { title: "Category 1", url: "/category1" },
-    { title: "Category 2", url: "/category2" },
-    { title: "Category 3", url: "/category3" },
+    { title: "Accessories", url: "/category1" },
+    { title: "Clothes", url: "/category2" },
+    { title: "Green Products", url: "/category3" },
+    { title: "Educational Products", url: "/category4" },
+    { title: "Toys", url: "/category5" },
+    { title: "Miscellaneous", url: "/category6" },
   ];
 
   const quickLinks = [
-    { title: "Link 1", url: "/link1" },
-    { title: "Link 2", url: "/link2" },
-    { title: "Link 3", url: "/link3" },
+    { title: "About us", url: "/link1" },
+    { title: "Products", url: "/link2" },
+    { title: "Testimonials", url: "/link3" },
+    { title: "Shop locator", url: "/link4" },
+    { title: "Online shop", url: "/link5" },
+    { title: "Bolg", url: "/blog" },
   ];
 
   const headQuarters = [
@@ -24,7 +30,7 @@ const Footer = () => {
 
   return (
     <footer className="w-full md:pt-20 pt-10 bg-[#343434] text-white">
-      <div className="mx-auto flex max-w-6xl flex-col items-start space-x-8 md:flex-row ">
+      <div className="mx-auto flex max-w-6xl flex-col items-start space-x-8 md:flex-row container">
         <div className="w-full px-4 md:w-1/2 lg:px-0">
           <h1 className="max-w-sm text-2xl font-bold uppercase tracking-wider">
             Sign up for our Newsletter

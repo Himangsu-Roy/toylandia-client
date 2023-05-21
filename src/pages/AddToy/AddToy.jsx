@@ -1,9 +1,11 @@
 import { useState } from "react";
+import useTitle from "../../utils/useTitle";
+import Swal from "sweetalert2";
 
 function AddToy() {
   const [formData, setFormData] = useState({
     pictureURL: "",
-    name: "",
+    toyName: "",
     sellerName: "",
     sellerEmail: "",
     subCategory: "",
@@ -24,7 +26,7 @@ function AddToy() {
     e.preventDefault();
     // Handle form submission logic here
     console.log(formData);
-    fetch("http://localhost:5000/addatoy", {
+    fetch("https://toy-landia-server.vercel.app/addatoy", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -34,8 +36,17 @@ function AddToy() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Data Added Successfully",
+          });
+        }
       });
   };
+
+  useTitle("Add Toy");
 
   return (
     <div className="container mx-auto py-10 px-3">
@@ -59,14 +70,13 @@ function AddToy() {
         </div>
         <div className="mb-6">
           <label className="block mb-2 font-bold" htmlFor="name">
-           Toy Name
+            Toy Name
           </label>
           <input
             type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            defaultValue={formData.name}
+            id="toyName"
+            name="toyName"
+            value={formData.toyName}
             onChange={handleInputChange}
             className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 bg-white"
           />
@@ -164,7 +174,7 @@ function AddToy() {
         </div>
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded-md col-span-full max-w-[15rem]"
+          className="bg-[#EE552A] text-white px-4 py-2 rounded-md col-span-full max-w-[15rem]"
         >
           Add Toy
         </button>

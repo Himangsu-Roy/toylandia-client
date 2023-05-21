@@ -5,11 +5,10 @@ import { AuthContext } from "../../contexts/AuthProvider";
 
 function UpdateToy() {
   const toy = useLoaderData();
-  console.log(toy);
-    const {
-      _id,
+  const {
+    _id,
     pictureURL,
-    name,
+    toyName,
     sellerName,
     sellerEmail,
     subCategory,
@@ -18,11 +17,10 @@ function UpdateToy() {
     quantity,
     description,
   } = toy;
-    const { user } = useContext(AuthContext);
-    console.log(user)
+  const { user } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     pictureURL: pictureURL,
-    name: name,
+    toyName: toyName,
     sellerName: sellerName,
     sellerEmail: sellerEmail,
     subCategory: subCategory,
@@ -39,11 +37,10 @@ function UpdateToy() {
     }));
   };
 
-
   // Function to handle toy update
-    const handleUpdateToy = (e) => {
-        e.preventDefault();
-    fetch(`http://localhost:5000/mytoy/${_id}`, {
+  const handleUpdateToy = (e) => {
+    e.preventDefault();
+    fetch(`https://toy-landia-server.vercel.app/mytoy/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -56,10 +53,9 @@ function UpdateToy() {
       });
   };
 
-
   return (
     <div className="container mx-auto py-10 px-3">
-      <h1 className="text-3xl font-bold mb-6">Update A Toy</h1>
+      <h1 className="text-3xl font-bold mb-8 text-center">Update A Toy</h1>
       <form
         onSubmit={handleUpdateToy}
         className="max-w-3xl mx-auto grid md:grid-cols-2 gap-4"
@@ -79,13 +75,13 @@ function UpdateToy() {
         </div>
         <div className="mb-6">
           <label className="block mb-2 font-bold" htmlFor="name">
-           Toy Name
+            Toy Name
           </label>
           <input
             type="text"
-            id="name"
-            name="name"
-            value={formData.name}
+            id="toyName"
+            name="toyName"
+            value={formData.toyName}
             onChange={handleInputChange}
             className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 bg-white"
           />
@@ -183,7 +179,7 @@ function UpdateToy() {
         </div>
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded-md col-span-full max-w-[15rem]"
+          className="bg-[#EE552A] hover:bg-[#c5431f] text-white px-4 py-2 rounded-md col-span-full max-w-[15rem]"
         >
           Update Toy
         </button>
@@ -193,4 +189,3 @@ function UpdateToy() {
 }
 
 export default UpdateToy;
-

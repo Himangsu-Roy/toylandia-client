@@ -1,25 +1,22 @@
 import React, { useState } from "react";
 import { useContext } from "react";
 import { useEffect } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import Swal from "sweetalert2";
 import UpdateToy from "../UpdateToy/UpdateToy";
-
 
 const MyToys = () => {
   const { user } = useContext(AuthContext);
   const [toys, setToys] = useState([]);
 
-  console.log(user);
   useEffect(() => {
-    fetch(`http://localhost:5000/mytoys/${user?.email}`)
+    fetch(`https://toy-landia-server.vercel.app/mytoys/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setToys(data);
       });
   }, [user]);
-  
 
   const handleUpdateToy = (id) => {
     <UpdateToy id={id}></UpdateToy>;
@@ -27,7 +24,6 @@ const MyToys = () => {
 
   // Function to handle toy deletion
   const handleDeleteToy = (toyId) => {
-
     Swal.fire({
       title: "Are you sure you want to delete this toy?",
       text: "You won't be able to revert this!",
@@ -38,7 +34,7 @@ const MyToys = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/toys/${toyId}`, {
+        fetch(`https://toy-landia-server.vercel.app/toys/${toyId}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -69,13 +65,13 @@ const MyToys = () => {
           <tbody className="text-center">
             {toys.map((toy) => (
               <tr key={toy._id}>
-                <td className="py-2 px-4 border-b">{toy.name}</td>
+                <td className="py-2 px-4 border-b">{toy.toyName}</td>
                 <td className="py-2 px-4 border-b">${toy.price}</td>
                 <td className="py-2 px-4 border-b">{toy.quantity}</td>
                 <td className="py-2 px-4 border-b">
                   <Link to={`/update/${toy._id}`}>
                     <button
-                      className="mr-2 bg-blue-500 hover:bg-blue-600 text-white py-1 px-2 rounded"
+                      className="mr-2 bg-black opacity-80 hover:bg-black hover:opacity-70 text-white py-1 px-2 rounded"
                       onClick={() => handleUpdateToy(toy._id)}
                     >
                       Edit

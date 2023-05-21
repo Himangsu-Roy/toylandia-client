@@ -11,18 +11,18 @@ const HomeLayout = () => {
     <div className="min-h-screen">
       {/* Banner Section */}
       <Banner></Banner>
-      
-        {/* Gallery Section */}
-        <Gallery></Gallery>
 
-        {/* Shop By Category */}
-        <ShopByCategory></ShopByCategory>
+      {/* Gallery Section */}
+      <Gallery></Gallery>
 
-        {/* Featured Section */}
-        <Featured></Featured>
+      {/* Shop By Category */}
+      <ShopByCategory></ShopByCategory>
 
-        {/* Testimonials */}
-        <Testimonials></Testimonials>
+      {/* Featured Section */}
+      <Featured></Featured>
+
+      {/* Testimonials */}
+      <Testimonials></Testimonials>
     </div>
   );
 };

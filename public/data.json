@@ -1,0 +1,112 @@
+[
+  {
+    "pictureURL": "https://m.media-amazon.com/images/I/71CGa6eVpzL._AC_UL600_FMwebp_QL65_.jpg",
+    "toyName": "RC Speedster",
+    "sellerName": "Toyland Seller",
+    "sellerEmail": "seller1@example.com",
+    "subCategory": "Remote Control Cars",
+    "price": 49.99,
+    "rating": 4.5,
+    "quantity": 10,
+    "description": "High-speed remote control car with precision control."
+  },
+  {
+    "pictureURL": "https://m.media-amazon.com/images/I/71FvtH-ln2L._AC_UL600_FMwebp_QL65_.jpg",
+    "toyName": "Off-Road Racer",
+    "sellerName": "Toy Universe",
+    "sellerEmail": "seller2@example.com",
+    "subCategory": "Remote Control Cars",
+    "price": 59.99,
+    "rating": 4.2,
+    "quantity": 8,
+    "description": "Durable off-road remote control car for all-terrain adventures."
+  },
+  {
+    "pictureURL": "https://m.media-amazon.com/images/I/91SBvBLCM0L._AC_UL600_FMwebp_QL65_.jpg",
+    "toyName": "Stunt Master",
+    "sellerName": "Playtime Emporium",
+    "sellerEmail": "seller3@example.com",
+    "subCategory": "Remote Control Cars",
+    "price": 39.99,
+    "rating": 4.8,
+    "quantity": 12,
+    "description": "Remote control car capable of performing amazing stunts."
+  },
+  {
+    "pictureURL": "https://m.media-amazon.com/images/I/818EniJlN2L._AC_UL600_FMwebp_QL65_.jpg",
+    "toyName": "Classic Mustang",
+    "sellerName": "Retro Toy Co.",
+    "sellerEmail": "seller4@example.com",
+    "subCategory": "Diecast Model Cars",
+    "price": 19.99,
+    "rating": 4.3,
+    "quantity": 15,
+    "description": "Detailed diecast model car replica of a classic Mustang."
+  },
+  {
+    "pictureURL": "https://m.media-amazon.com/images/I/81ukvyQhxML._AC_UL600_FMwebp_QL65_.jpg",
+    "toyName": "Sports Car Collection",
+    "sellerName": "Car Enthusiast Toys",
+    "sellerEmail": "seller5@example.com",
+    "subCategory": "Diecast Model Cars",
+    "price": 29.99,
+    "rating": 4.6,
+    "quantity": 20,
+    "description": "Set of diecast model cars featuring various sports car models."
+  },
+  {
+    "pictureURL": "https://m.media-amazon.com/images/I/51rGjir4cgL._AC_UL600_FMwebp_QL65_.jpg",
+    "toyName": "Vintage Pickup Truck",
+    "sellerName": "Nostalgia Toys",
+    "sellerEmail": "seller6@example.com",
+    "subCategory": "Diecast Model Cars",
+    "price": 24.99,
+    "rating": 4.1,
+    "quantity": 18,
+    "description": "Diecast model of a vintage pickup truck with realistic details."
+  },
+  {
+    "pictureURL": "https://m.media-amazon.com/images/I/81sTdq5WU1L._AC_UL600_FMwebp_QL65_.jpg",
+    "toyName": "Formula Racer",
+    "sellerName": "Speedy Toys",
+    "sellerEmail": "seller7@example.com",
+    "subCategory": "Race Cars",
+    "price": 34.99,
+    "rating": 4.7,
+    "quantity": 9,
+    "description": "Sleek and fast race car toy for exciting track action."
+  },
+  {
+    "pictureURL": "https://m.media-amazon.com/images/I/71zWQvzfwOL._AC_UL600_FMwebp_QL65_.jpg",
+    "toyName": "Monster Truck Madness",
+    "sellerName": "Adrenaline Toys",
+    "sellerEmail": "seller8@example.com",
+    "subCategory": "Race Cars",
+    "price": 39.99,
+    "rating": 4.4,
+    "quantity": 7,
+    "description": "Powerful monster truck toy with large wheels and impressive design."
+  },
+  {
+    "pictureURL": "https://m.media-amazon.com/images/I/51ILqjXczkL._AC_UL600_FMwebp_QL65_.jpg",
+    "toyName": "Construction Crew",
+    "sellerName": "Building Blocks Toys",
+    "sellerEmail": "seller9@example.com",
+    "subCategory": "Construction Vehicle Toys",
+    "price": 29.99,
+    "rating": 4.9,
+    "quantity": 14,
+    "description": "Set of construction vehicle toys for building and imaginative play."
+  },
+  {
+    "pictureURL": "https://m.media-amazon.com/images/I/81WwtDuS13S._AC_UL600_FMwebp_QL65_.jpg",
+    "toyName": "City Police Cruiser",
+    "sellerName": "Cop Cars Galore",
+    "sellerEmail": "seller10@example.com",
+    "subCategory": "Police Car Toys",
+    "price": 19.99,
+    "rating": 4.0,
+    "quantity": 11,
+    "description": "Toy police car with lights and sounds for exciting law enforcement play."
+  }
+]

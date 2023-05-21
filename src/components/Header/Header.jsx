@@ -5,14 +5,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
 import useTitle from "../../utils/useTitle";
+import ActiveLink from "../ActiveLink/ActiveLink";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  // const path = location.pathname;
-  const isSignInPage = location.pathname === "/login";
-  const isRegisterPage = location.pathname === "/register";
+ 
 
   const signOut = () => {
     logOut()
@@ -70,12 +69,12 @@ const Header = () => {
           <ul className="inline-flex space-x-8">
             {menuItems.map((item) => (
               <li key={item.name}>
-                <Link
+                <ActiveLink
                   to={item.href}
                   className="text-sm font-semibold text-gray-800 hover:text-gray-900 uppercase"
                 >
                   {item.name}
-                </Link>
+                </ActiveLink>
               </li>
             ))}
           </ul>
