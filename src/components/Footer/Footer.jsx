@@ -55,9 +55,9 @@ const Footer = () => {
           <div className="mt-4 gap-4 flex flex-wrap">
             {" "}
             <Link>facebook</Link>
-            <Link>facebook</Link>
-            <Link>facebook</Link>
-            <Link>facebook</Link>
+            <Link>instagram</Link>
+            <Link>twitter</Link>
+            <Link>linkdin</Link>
           </div>
         </div>
         <div className="mt-8 grid grid-cols-2 gap-6 md:mt-0 lg:w-3/4 lg:grid-cols-3">
